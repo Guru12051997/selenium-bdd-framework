@@ -23,3 +23,9 @@ jobs:
 
       - name: Run Tests
         run: mvn test
+
+      - name: Print Test Failures
+        if: always()
+        run: |
+          echo "===== Surefire Reports ====="
+          cat target/surefire-reports/*.txt || true
