@@ -18,8 +18,8 @@ jobs:
           java-version: '17'
           distribution: 'temurin'   # required
 
-      - name: Install Dependencies
-        run: mvn clean install
+#      - name: Install Dependencies
+#        run: mvn clean install
 
       - name: Run Tests
         run: mvn test
