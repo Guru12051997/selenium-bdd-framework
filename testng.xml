@@ -8,11 +8,11 @@
         </classes>
     </test>
 
-    <!-- ✅ Failed Test Run -->
-    <test name="Failed Tests">
-        <classes>
-            <class name="runners.FailedRunner"/>
-        </classes>
-    </test>
+<!--    &lt;!&ndash; ✅ Failed Test Run &ndash;&gt;-->
+<!--    <test name="Failed Tests">-->
+<!--        <classes>-->
+<!--            <class name="runners.FailedRunner"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 </suite>
