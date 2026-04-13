@@ -24,8 +24,8 @@ public class LoginPage {
         Thread.sleep(2000);
         driver.findElement(password).sendKeys(pass);
         Thread.sleep(2000);
-        driver.findElement(loginBtn).click();
-        Thread.sleep(10000);
+       // driver.findElement(loginBtn).click();
+      //  Thread.sleep(10000);
 //        actions.type(username, user);
 //        actions.type(password, pass);
 //        actions.click(loginBtn);
