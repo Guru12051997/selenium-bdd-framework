@@ -1,0 +1,24 @@
+userName: guruprasaddas_eJaPEZ
+accessKey: Ci2H1d66yqe4vJ1bdJsr
+
+framework: testng
+
+platforms:
+  - os: Windows
+    osVersion: 11
+    browserName: Chrome
+    browserVersion: latest
+
+  - os: OS X
+    osVersion: Ventura
+    browserName: Safari
+    browserVersion: latest
+
+parallelsPerPlatform: 2
+
+buildName: BDD Framework Build
+projectName: Selenium BDD Framework
+
+debug: true
+networkLogs: true
+consoleLogs: info

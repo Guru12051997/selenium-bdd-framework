@@ -1,0 +1,3 @@
+//mvn test -Dheadless=true        #== Headless mode
+mvn test -Dbrowserstack=true      #== run in browserstack
+// mvn test --- headed mode
