@@ -21,21 +21,20 @@ public class BaseTest {
 
         ChromeOptions options = new ChromeOptions();
 
-        // ✅ Always run headless in CI
-        String headless = System.getProperty("headless", "true");
-        if (headless.equalsIgnoreCase("true")) {
+        // ✅ Headless only for CI
+        if (System.getProperty("headless") != null) {
             options.addArguments("--headless=new");
         }
 
-        // ✅ MUST for GitHub Actions (Linux stability)
+        // ✅ Stability fixes
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--disable-gpu");
         options.addArguments("--remote-allow-origins=*");
-        options.addArguments("--disable-software-rasterizer");  // 🔥 fix crash
-        options.addArguments("--single-process");               // 🔥 extra stability
 
-        // ✅ Fix element visibility
+        // 🔥 MOST IMPORTANT FIX
+        options.addArguments("--remote-debugging-port=9222");
+
         options.addArguments("--window-size=1920,1080");
 
         driver.set(new ChromeDriver(options));

@@ -6,6 +6,12 @@ import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import utils.ScreenshotUtil;
 
+import base.BaseTest;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
+import utils.ScreenshotUtil;
+
 public class Hooks extends BaseTest {
 
     @Before
@@ -15,9 +21,19 @@ public class Hooks extends BaseTest {
 
     @After
     public void end(Scenario scenario) {
-        if (scenario.isFailed()) {
-            ScreenshotUtil.capture(getDriver(), scenario.getName());
+
+        try {
+            // ✅ Take screenshot only if failed
+            if (scenario.isFailed() && getDriver() != null) {
+                ScreenshotUtil.capture(getDriver(), scenario.getName());
+            }
+        } catch (Exception e) {
+            System.out.println("Screenshot failed: " + e.getMessage());
+        } finally {
+            // ✅ Always quit driver safely
+            if (getDriver() != null) {
+                tearDown();
+            }
         }
-        tearDown();
     }
 }
