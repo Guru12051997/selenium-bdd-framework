@@ -26,7 +26,8 @@ public class LoginSteps extends BaseTest {
     }
 
     @Then("user should see dashboard")
-    public void verify() {
+    public void verify() throws InterruptedException {
+       loginPage.verifyforgotPassword();
         System.out.println("Verified");
     }
 }

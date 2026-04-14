@@ -2,6 +2,8 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import utils.SeleniumActions;
 
 public class LoginPage {
@@ -29,5 +31,21 @@ public class LoginPage {
 //        actions.type(username, user);
 //        actions.type(password, pass);
 //        actions.click(loginBtn);
+    }
+
+    public void verifyforgotPassword() throws InterruptedException {
+        // Locate the element using XPath
+        WebElement forgotPasswordLink = driver.findElement(By.xpath("//span[text()='Forgotten password?']"));
+
+        // Validate that the element is displayed
+        Assert.assertTrue(forgotPasswordLink.isDisplayed(), "Forgotten password link is not visible");
+
+        // Validate the text
+        String actualText = forgotPasswordLink.getText();
+        Assert.assertEquals("Forgotten password?", actualText);
+        forgotPasswordLink.click();
+        Thread.sleep(3000);
+
+
     }
 }
