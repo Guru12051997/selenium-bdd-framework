@@ -22,27 +22,26 @@ public class BaseTest {
         ChromeOptions options = new ChromeOptions();
 
         // ✅ Always run headless in CI
-        if (System.getProperty("headless") != null) {
+        String headless = System.getProperty("headless", "true");
+        if (headless.equalsIgnoreCase("true")) {
             options.addArguments("--headless=new");
         }
 
-        // ✅ Stability fixes (VERY IMPORTANT)
+        // ✅ MUST for GitHub Actions (Linux stability)
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--disable-gpu");
         options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--disable-software-rasterizer");  // 🔥 fix crash
+        options.addArguments("--single-process");               // 🔥 extra stability
 
-        // ✅ Fix element visibility issue
+        // ✅ Fix element visibility
         options.addArguments("--window-size=1920,1080");
 
         driver.set(new ChromeDriver(options));
 
-        // ✅ Implicit wait
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-        // ❌ Don't use maximize in headless
     }
-
     public void tearDown() {
         if (getDriver() != null) {
             getDriver().quit();

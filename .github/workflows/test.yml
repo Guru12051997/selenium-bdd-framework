@@ -12,20 +12,42 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      # ✅ Install Chrome (VERY IMPORTANT)
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v1
+
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
-          java-version: '21'
+          java-version: '17'   # 🔥 safer than 21
           distribution: 'temurin'
 
-      - name: Install Dependencies
+      - name: Build Project
         run: mvn clean install -DskipTests
 
+      # ✅ Run tests in headless
       - name: Run Tests
-        run: mvn test
+        run: mvn test -Dheadless=true
 
+      # ✅ Print failure logs
       - name: Print Test Failures
         if: always()
         run: |
           echo "===== Surefire Reports ====="
           cat target/surefire-reports/*.txt || true
+
+      # ✅ Upload Allure results
+      - name: Upload Allure Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: target/allure-results
+
+      # ✅ Upload Extent report
+      - name: Upload Extent Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: extent-report
+          path: target/extent-report.html
